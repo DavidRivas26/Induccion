@@ -1,0 +1,65 @@
+﻿<script src="~/Scripts/js/user.js"></script>
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<h2>Inicio</h2>
+<br />
+
+<p>Bienvenido <strong>@ViewBag.User.Email</strong></p>
+<br />
+
+<a class="btn btn-outline-dark" href="~/Product/ProductsIndex">Productos</a>
+<a class="btn btn-outline-dark" href="~/Category/CategoriesIndex">Categorias</a>
+<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" onclick="showModal();">Editar Perfil</button>
+<a class="btn btn-outline-danger" href="~/User/LogOut">Cerrar Sesion</a>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Usuario</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="hideModal();">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <input type="hidden" id="Id_User" value="@ViewBag.User.Id_User">
+                    <div class="form-group">
+                        <label for="Name">Nombre</label>
+                        <input type="text" class="form-control" name="name" id="Name" placeholder="Nombre" value="@ViewBag.User.Name" />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="LastName">Apellido</label>
+                        <input type="text" class="form-control" name="lastname" id="LastName" placeholder="Apellido" value="@ViewBag.User.LastName" />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="Address">Direccion</label>
+                        <input type="text" class="form-control" name="address" id="Address" placeholder="Direccion" value="@ViewBag.User.Address" />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="Phone">Telefono</label>
+                        <input type="text" class="form-control" name="phone" id="Phone" placeholder="Telefono" value="@ViewBag.User.Phone" />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="Email">Correo</label>
+                        <input type="email" class="form-control" name="email" id="Email" placeholder="Correo" value="@ViewBag.User.Email" />
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="Password">Contraseña</label>
+                        <input type="password" class="form-control" name="password" id="Password" placeholder="Contraseña" value="@ViewBag.User.Password" />
+                    </div>
+                    <br />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" id="btnUpdate" onclick="Update();">Actualizar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" onclick="hideModal();">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

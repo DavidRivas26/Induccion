@@ -1,0 +1,44 @@
+﻿<script src="~/Scripts/js/user.js"></script>
+@{
+    ViewBag.Title = "Registro";
+}
+
+<div class="container">
+    <h2>Registro</h2>
+    <br />
+    <form id="form">
+        <div class="form-group">
+            <label for="Name">Nombre</label>
+            <input type="text" class="form-control" name="name" id="Name" placeholder="Nombre" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="LastName">Apellido</label>
+            <input type="text" class="form-control" name="lastname" id="LastName" placeholder="Apellido" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="Address">Direccion</label>
+            <input type="text" class="form-control" name="address" id="Address" placeholder="Direccion" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="Phone">Telefono</label>
+            <input type="text" class="form-control" name="phone" id="Phone" placeholder="Telefono" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="Email">Correo</label>
+            <input type="email" class="form-control" name="email" id="Email" placeholder="Correo" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="Password">Contraseña</label>
+            <input type="password" class="form-control" name="password" id="Password" placeholder="Contraseña" />
+        </div>
+        <br />
+    </form>
+    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Registrarse</button>
+    <br /><br />
+    <a class="btn btn-outline-dark" href="~/User/Login">Ya tienes cuenta? Logueate</a>
+</div>

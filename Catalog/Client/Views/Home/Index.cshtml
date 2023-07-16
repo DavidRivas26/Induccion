@@ -1,0 +1,89 @@
+﻿<script src="~/Scripts/js/client.js"></script>
+@{
+    ViewBag.Title = "Productos";
+}
+
+<h2>Productos</h2>
+<div class="form-row">
+    <div class="col-md-6 mb-3">
+        <label for="Name">Nombre</label>
+        <input class="form-control" placeholder="Buscar" name="Name" id="Name">
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="Id_Category">Categoria</label>
+        <select class="form-control" name="Id_Category" id="Id_Category">
+            <option value="" selected="selected" disabled="disabled">Seleccione una opcion</option>
+            @{ foreach (var category in ViewBag.categories)
+                {
+                    <option value="@category.Id_Category">@category.Name</option>
+                }
+            }
+        </select>
+    </div>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Categoria
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Descripcion
+            </th>
+            <th>
+                Stock
+            </th>
+            <th>
+                Detalle
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Autor
+            </th>
+            <th>
+                Fecha de creacion
+            </th>
+            <th>
+                Fecha de actualizacion
+            </th>
+            <th>
+                Accion
+            </th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+    </tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Detalle de producto</h4>
+                <button type="button" class="close" data-dismiss="modal" onclick="hideModal();">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <input type="hidden" id="Id_Product">
+                    <div class="form-group">
+                        <label for="Detail">Detalle</label>
+                        <input type="text" class="form-control" name="detail" id="Detail" placeholder="Detalle" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" id="btnUpdate" onclick="Update();">Actualizar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" onclick="hideModal();">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

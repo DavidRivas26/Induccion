@@ -1,0 +1,24 @@
+﻿<script src="~/Scripts/js/user.js"></script>
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="container">
+    <h2>Login</h2>
+    <br />
+    <form id="form">
+        <div class="form-group">
+            <label for="Email">Correo</label>
+            <input type="email" class="form-control" name="email" id="Email" placeholder="Correo" />
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="Password">Contraseña</label>
+            <input type="password" class="form-control" name="password" id="Password" placeholder="Contraseña" />
+        </div>
+        <br />
+    </form>
+    <button type="button" class="btn btn-primary" id="btnLogIn" onclick="return Validate();">Loguearse</button>
+    <br /><br />
+    <a class="btn btn-outline-dark" href="~/User/Register">No tienes cuenta? Registrate</a>
+</div>

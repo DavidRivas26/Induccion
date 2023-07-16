@@ -1,0 +1,14 @@
+C:\Users\eline\source\repos\Ejercicios\ExerciseWCF\bin\ExerciseWCF.dll.config
+C:\Users\eline\source\repos\Ejercicios\ExerciseWCF\bin\ExerciseWCF.dll
+C:\Users\eline\source\repos\Ejercicios\ExerciseWCF\bin\ExerciseWCF.pdb
+C:\Users\eline\source\repos\Ejercicios\ExerciseWCF\obj\Debug\ExerciseWCF.csproj.AssemblyReference.cache
+C:\Users\eline\source\repos\Ejercicios\ExerciseWCF\obj\Debug\ExerciseWCF.csproj.CoreCompileInputs.cache
+C:\Users\eline\source\repos\Ejercicios\ExerciseWCF\obj\Debug\ExerciseWCF.dll
+C:\Users\eline\source\repos\Ejercicios\ExerciseWCF\obj\Debug\ExerciseWCF.pdb
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\ExerciseWCF\bin\ExerciseWCF.dll.config
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\ExerciseWCF\bin\ExerciseWCF.dll
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\ExerciseWCF\bin\ExerciseWCF.pdb
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\ExerciseWCF\obj\Debug\ExerciseWCF.csproj.AssemblyReference.cache
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\ExerciseWCF\obj\Debug\ExerciseWCF.csproj.CoreCompileInputs.cache
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\ExerciseWCF\obj\Debug\ExerciseWCF.dll
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\ExerciseWCF\obj\Debug\ExerciseWCF.pdb

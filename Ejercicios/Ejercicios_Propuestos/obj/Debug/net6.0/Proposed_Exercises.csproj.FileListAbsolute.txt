@@ -1,0 +1,15 @@
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\bin\Debug\net6.0\Proposed_Exercises.exe
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\bin\Debug\net6.0\Proposed_Exercises.deps.json
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\bin\Debug\net6.0\Proposed_Exercises.runtimeconfig.json
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\bin\Debug\net6.0\Proposed_Exercises.dll
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\bin\Debug\net6.0\Proposed_Exercises.pdb
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\Proposed_Exercises.csproj.AssemblyReference.cache
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\Proposed_Exercises.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\Proposed_Exercises.AssemblyInfoInputs.cache
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\Proposed_Exercises.AssemblyInfo.cs
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\Proposed_Exercises.csproj.CoreCompileInputs.cache
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\Proposed_Exercises.dll
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\refint\Proposed_Exercises.dll
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\Proposed_Exercises.pdb
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\Proposed_Exercises.genruntimeconfig.cache
+C:\Users\DavidR\source\repos\Inducción\Ejercicios\Ejercicios_Propuestos\obj\Debug\net6.0\ref\Proposed_Exercises.dll
