@@ -11,50 +11,47 @@ namespace LogicLayer
 {
     public class Products_BLL
     {
-        private Products_DAL _products;
-        public Products_BLL(SqlConnection connection) 
-        {
-            _products = new Products_DAL(connection);
-        }
-        public bool Add(Product product, string Author = "")
+        private Products_DAL _products = new Products_DAL();
+
+        public bool addProduct(Product product, string Author = "")
         {
             product.Author = Author;
-            return _products.Add(product);
+            return _products.addProduct(product);
         }
-        public bool Update(Product product, string Author = "")
+        public bool updateProduct(Product product, string Author = "")
         {
             product.Author = Author;
-            return _products.Update(product);
+            return _products.updateProduct(product);
         }
-        public bool UpdateDetail(Product product)
+        public bool updateProductDetail(Product product)
         {
-            return _products.UpdateDetail(product);
+            return _products.updateProductDetail(product);
         }
-        public bool Delete(int Id)
+        public bool deleteProduct(int idProduct)
         {
-            return _products.Delete(Id);
+            return _products.deleteProduct(idProduct);
         }
-        public List<Product> GetAll()
+        public List<Product> getAllProducts()
         {
-            return _products.GetAll();
+            return _products.getAllProducts();
         }
-        public List<Product> GetAllByCategory(string Id)
+        public List<Product> getProductByCategory(string category)
         {
-            if (string.IsNullOrEmpty(Id))
-                Id = string.Empty;
+            if (string.IsNullOrEmpty(category))
+                category = string.Empty;
 
-            return _products.GetAll().Where(x => x.Id_Category == Id).ToList();
+            return _products.getProductByCategory(category);
         }
-        public List<Product> GetAllBySearch(string Id)
+        public List<Product> searchProductByName(string name)
         {
-            if(string.IsNullOrEmpty(Id))
-                Id = string.Empty;
+            if(string.IsNullOrEmpty(name))
+                name = string.Empty;
 
-            return _products.GetAll().Where(x => x.Name.Contains(Id)).ToList();
+            return _products.searchProductByName(name);
         }
-        public Product GetById(int Id)
+        public Product getProductById(int idProduct)
         {
-            return _products.GetAll().Find(x => x.Id_Product.Equals(Id));
+            return _products.getProductById(idProduct);
         }
     }
 }

@@ -1,4 +1,4 @@
-	create database Catalog
+create database Catalog
 use Catalog
 
 drop database Catalog
@@ -75,6 +75,33 @@ Begin
 	Products.Date_Creation, Products.Date_Update from Products inner join Categories on Products.Id_Category_FK = Categories.Id_Category
 End
 
+Create Proc sp_get_product_by_id
+	@Id_Product int
+As
+Begin
+	select Id_Product, Categories.Name as Category, Products.Name, Products.Description, Stock, Products.Detail, Products.Status, Products.Author,
+	Products.Date_Creation, Products.Date_Update from Products inner join Categories on Products.Id_Category_FK = Categories.Id_Category
+	where Id_Product = @Id_Product
+End
+
+Create Proc sp_get_product_by_category
+	@Category varchar(50)
+As
+Begin
+	select Id_Product, Categories.Name as Category, Products.Name, Products.Description, Stock, Products.Detail, Products.Status, Products.Author,
+	Products.Date_Creation, Products.Date_Update from Products inner join Categories on Products.Id_Category_FK = Categories.Id_Category
+	where Categories.Name = @Category
+End
+
+Create Proc sp_get_product_by_name
+	@Name varchar(50)
+As
+Begin
+	select Id_Product, Categories.Name as Category, Products.Name, Products.Description, Stock, Products.Detail, Products.Status, Products.Author,
+	Products.Date_Creation, Products.Date_Update from Products inner join Categories on Products.Id_Category_FK = Categories.Id_Category
+	where Products.Name = @Name
+End
+
 ----------------------------------------------------------------------------------------------------------------------------------------- 
 
 Create table Categories
@@ -126,6 +153,13 @@ Create Proc sp_get_all_category
 As
 Begin
 	select Id_Category, Name, Description, Status, Author, Date_Creation, Date_Update from Categories
+End
+
+Create Proc sp_get_category_by_id
+	@Id_Category int
+As
+Begin
+	select Id_Category, Name, Description, Status, Author, Date_Creation, Date_Update from Categories where Id_Category = @Id_Category
 End
 
 ----------------------------------------------------------------------------------------------------------------------------------------- 

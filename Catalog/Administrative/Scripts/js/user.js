@@ -1,4 +1,17 @@
-﻿function Add() {
+﻿$(function () {
+    $('#btnAdd').on('click', function () {
+        Add();
+    });
+    $('#btnUpdate').on('click', function () {
+        Update();
+    });
+    $('#btnLogIn').on('click', function () {
+        Validate();
+    });
+    
+});
+
+function Add() {
     var res = validate();
     if (res == false) {
         return false;
@@ -11,27 +24,9 @@
         Email: $('#Email').val(),
         Password: $('#Password').val()
     };
-    $.ajax({
-        url: "/User/UsersAdd",
-        data: JSON.stringify(userObj),
-        type: "POST",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            alert("Se ha registrado exitosamente");
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
+    request.post("/User/UsersAdd", userObj, function (result) {
+        alert("Se ha registrado exitosamente");
     });
-}
-
-function showModal() {
-    $('#myModal').modal('show');
-}
-
-function hideModal() {
-    $('#myModal').modal('hide');
 }
 
 function Validate() {
@@ -43,21 +38,11 @@ function Validate() {
         Email: $('#Email').val(),
         Password: $('#Password').val()
     };
-    $.ajax({
-        url: "/User/UsersValidate",
-        data: JSON.stringify(userObj),
-        type: "POST",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            if (result.Id_User != 0)
-                window.location.href = "https://localhost:44333/User/Index";
-            else
-                alert("Credenciales incorrectas");
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);        
-        }
+    request.post("/User/UsersValidate", userObj, function (result) {
+        if (result.Id_User != 0)
+            window.location.href = "https://localhost:44333/User/Index";
+        else
+            alert("Credenciales incorrectas");
     });
 }
 
@@ -75,18 +60,8 @@ function Update() {
         Email: $('#Email').val(),
         Password: $('#Password').val()
     };
-    $.ajax({
-        url: "/User/UsersUpdate",
-        data: JSON.stringify(userObj),
-        type: "POST",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            hideModal();
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
+    request.post("/User/UsersUpdate", userObj, function (result) {
+        $("#myModal .close").click();
     });
 }
 

@@ -11,33 +11,29 @@ namespace LogicLayer
 {
     public class Categories_BLL
     {
-        private Categories_DAL _categories;
-        public Categories_BLL(SqlConnection connection) 
-        {
-            _categories = new Categories_DAL(connection);
-        }
-        public bool Add(Category category, string Author)
+        private Categories_DAL _categories = new Categories_DAL();
+
+        public bool addCategory(Category category, string Author)
         {
             category.Author = Author;
-            return _categories.Add(category);
+            return _categories.addCategory(category);
         }
-        public bool Update(Category category, string Author) 
+        public bool updateCategory(Category category, string Author) 
         {
             category.Author = Author;
-            return _categories.Update(category);
+            return _categories.updateCategory(category);
         }
-        public bool Delete(int Id) 
+        public bool deleteCategory(int idCategory) 
         {
-            return _categories.Delete(Id);
+            return _categories.deleteCategory(idCategory);
         }
-        public List<Category> GetAll()
+        public List<Category> getAllCategories()
         {
-            return _categories.GetAll();
+            return _categories.getAllCategories();
         }
-        public Category GetById(int Id)
+        public Category getCategoryById(int idCategory)
         {
-            return _categories.GetAll().Find(x => x.Id_Category.Equals(Id));
-;
+            return _categories.getCategoryById(idCategory);
         }
     }
 }

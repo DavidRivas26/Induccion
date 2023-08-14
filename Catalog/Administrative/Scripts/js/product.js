@@ -1,36 +1,33 @@
 ﻿$(function () {
     loadData();
+    $('#btnAdd').on('click', function () {
+        Add();
+    });
+    $('#btnUpdate').on('click', function () {
+        Update();
+    });
 });
 
 function loadData() {
-    $.ajax({
-        url: "/Product/ProductsList",
-        type: "GET",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            var html = '';
-            $.each(result, function (key, item) {
-                html += '<tr>';
-                html += '<td>' + item.Id_Product + '</td>';
-                html += '<td>' + item.Id_Category + '</td>';
-                html += '<td>' + item.Name + '</td>';
-                html += '<td>' + item.Description + '</td>';
-                html += '<td>' + item.Stock + '</td>';
-                html += '<td>' + item.Detail + '</td>';
-                html += '<td>' + (item.Status ? 'Activo' : 'Inactivo') + '</td>';
-                html += '<td>' + item.Author + '</td>';
-                html += '<td>' + item.Date_Creation + '</td>';
-                html += '<td>' + item.Date_Update + '</td>';
-                html += '<td><a href="#" class="btn btn-outline-primary" onclick="return getbyID(' + item.Id_Product + ')">Actualizar</a>' +
-                    '  <a href="#" class="btn btn-outline-danger" onclick="Delele(' + item.Id_Product + ')">Eliminar</a></td>';
-                html += '</tr>';
-            });
-            $('.tbody').html(html);
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
+    request.get("/Product/ProductsList", function (result) {
+        var html = '';
+        $.each(result, function (key, item) {
+            html += '<tr>';
+            html += '<td>' + item.Id_Product + '</td>';
+            html += '<td>' + item.Id_Category + '</td>';
+            html += '<td>' + item.Name + '</td>';
+            html += '<td>' + item.Description + '</td>';
+            html += '<td>' + item.Stock + '</td>';
+            html += '<td>' + item.Detail + '</td>';
+            html += '<td>' + (item.Status ? 'Activo' : 'Inactivo') + '</td>';
+            html += '<td>' + item.Author + '</td>';
+            html += '<td>' + item.Date_Creation + '</td>';
+            html += '<td>' + item.Date_Update + '</td>';
+            html += '<td><a href="#" class="btn btn-outline-primary" onclick="return getbyID(' + item.Id_Product + ')">Actualizar</a>' +
+                '  <a href="#" class="btn btn-outline-danger" onclick="Delele(' + item.Id_Product + ')">Eliminar</a></td>';
+            html += '</tr>';
+        });
+        $('.tbody').html(html);
     });
 }
 
@@ -47,44 +44,27 @@ function Add() {
         Stock: $('#Stock').val(),
         Status: $('#Status').val()
     };
-    $.ajax({
-        url: "/Product/ProductsAdd",
-        data: JSON.stringify(productObj),
-        type: "POST",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            loadData();
-            $('#myModal').modal('hide');
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
+
+    request.post("/Product/ProductsAdd", productObj, function (result) {
+        $("#myModal .close").click();
+        loadData();
+        clear();
     });
 }
 
 function getbyID(Id) {
-    $.ajax({
-        url: "/Product/ProductsgetbyID/" + Id,
-        typr: "GET",
-        contentType: "application/json;charset=UTF-8",
-        dataType: "json",
-        success: function (result) {
-            $('#Id_Product').val(result.Id_Product);
-            $('#Id_Category option:contains("' + result.Id_Category + '")').prop('selected', true);
-            $('#Name').val(result.Name);
-            $('#Detail').val(result.Detail);
-            $('#Description').val(result.Description);
-            $('#Stock').val(result.Stock);
-            $(`#Status option[value='${result.Status}']`).prop('selected', true);
-                   
-            $('#myModal').modal('show');
-            $('#btnUpdate').show();
-            $('#btnAdd').hide();
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
+    request.get("/Product/ProductsgetbyID/" + Id, function (result) {
+        $('#Id_Product').val(result.Id_Product);
+        $('#Id_Category option:contains("' + result.Id_Category + '")').prop('selected', true);
+        $('#Name').val(result.Name);
+        $('#Detail').val(result.Detail);
+        $('#Description').val(result.Description);
+        $('#Stock').val(result.Stock);
+        $(`#Status option[value='${result.Status}']`).prop('selected', true);
+
+        $('#myModal').modal('show');
+        $('#btnUpdate').show();
+        $('#btnAdd').hide();
     });
     return false;
 }
@@ -103,55 +83,28 @@ function Update() {
         Detail: $('#Detail').val(),
         Status: $('#Status').val()
     };
-    $.ajax({
-        url: "/Product/ProductsUpdate",
-        data: JSON.stringify(productObj),
-        type: "POST",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            loadData();
-            $('#myModal').modal('hide');
-            $('#Id_Product').val("");
-            $('#Id_Category').val("");
-            $('#Name').val("");
-            $('#Description').val("");
-            $('#Detail').val("");
-            $('#Stock').val("");
-            $('#Status').val("");
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
+
+    request.post("/Product/ProductsUpdate", productObj, function (result) {
+        loadData();
+        clear();
+        $("#myModal .close").click();
+        $('#Id_Product').val("");
+        $('#Id_Category').val("");
+        $('#Name').val("");
+        $('#Description').val("");
+        $('#Detail').val("");
+        $('#Stock').val("");
+        $('#Status').val("");
     });
 }
 
 function Delele(Id) {
     var ans = confirm("Seguro que desea eliminar este producto?");
     if (ans) {
-        $.ajax({
-            url: "/Product/ProductsDelete/" + Id,
-            type: "POST",
-            contentType: "application/json;charset=UTF-8",
-            dataType: "json",
-            success: function (result) {
-                loadData();
-            },
-            error: function (errormessage) {
-                alert(errormessage.responseText);
-            }
+        request.post("/Product/ProductsDelete/" + Id, null, function (result) {
+            loadData();
         });
     }
-}
-
-function showModal() {
-    clear();
-    $('#myModal').modal('show');
-}
-
-function hideModal() {
-    clear();
-    $('#myModal').modal('hide');
 }
 
 function clear() {

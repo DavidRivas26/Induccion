@@ -11,22 +11,19 @@ namespace LogicLayer
 {
     public class Users_BLL
     {
-        private Users_DAL _users;
-        public Users_BLL(SqlConnection connection)
+        private Users_DAL _users = new Users_DAL();
+
+        public bool addUser(User user)
         {
-            _users = new Users_DAL(connection);
+            return _users.addUser(user);
         }
-        public bool Add(User user)
+        public bool updateUser(User user)
         {
-            return _users.Add(user);
+            return (_users.updateUser(user));
         }
-        public bool Update(User user)
+        public User validateUser(User user)
         {
-            return (_users.Update(user));
-        }
-        public User Login(User user)
-        {
-            return _users.Login(user);
+            return _users.validateUser(user);
         }
     }
 }

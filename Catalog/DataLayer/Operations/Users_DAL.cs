@@ -6,22 +6,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataLayer.DB;
 
 namespace DataLayer.Operations
 {
     public class Users_DAL
     {
+        DBConnection dbConnection = new DBConnection();
 
-        private SqlConnection _connection;
-        public Users_DAL(SqlConnection connection)
-        {
-            _connection = connection;
-        }
-
-        public bool Add(User user)
+        public bool addUser(User user)
         {
 
-            SqlCommand command = new SqlCommand("sp_create_user", _connection);
+            SqlCommand command = new SqlCommand("sp_create_user", dbConnection.getConnection());
             command.CommandType = CommandType.StoredProcedure;
 
             command.Parameters.AddWithValue("@Name", user.Name);
@@ -30,14 +26,14 @@ namespace DataLayer.Operations
             command.Parameters.AddWithValue("@Phone", user.Phone);
             command.Parameters.AddWithValue("@Email", user.Email);
             command.Parameters.AddWithValue("@Password", user.Password);
-            return ExecuteCommand(command);
+            return executeCommand(command);
 
         }
 
-        public bool Update(User user)
+        public bool updateUser(User user)
         {
 
-            SqlCommand command = new SqlCommand("sp_update_user", _connection);
+            SqlCommand command = new SqlCommand("sp_update_user", dbConnection.getConnection());
             command.CommandType = CommandType.StoredProcedure;
 
             command.Parameters.AddWithValue("@Id_User", user.Id_User);
@@ -48,52 +44,18 @@ namespace DataLayer.Operations
             command.Parameters.AddWithValue("@Email", user.Email);
             command.Parameters.AddWithValue("@Password", user.Password);
 
-            return ExecuteCommand(command);
+            return executeCommand(command);
 
         }
 
-        public User Login(User user)
-        {
-
-            SqlCommand command = new SqlCommand("sp_validate_user", _connection);
-            command.CommandType = CommandType.StoredProcedure;
-
-            command.Parameters.AddWithValue("@Email", user.Email);
-            command.Parameters.AddWithValue("@Password", user.Password);
-
-            _connection.Open();
-
-            var reader = command.ExecuteReader();
-            
-            if (reader.Read())
-            {
-                user = new User
-                {
-                    Id_User = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
-                    Name = reader.IsDBNull(1) ? "" : reader.GetString(1),
-                    LastName = reader.IsDBNull(2) ? "" : reader.GetString(2),
-                    Address = reader.IsDBNull(3) ? "" : reader.GetString(3),
-                    Phone = reader.IsDBNull(4) ? "" : reader.GetString(4),
-                    Email = reader.IsDBNull(5) ? "" : reader.GetString(5),
-                    Password = reader.IsDBNull(6) ? "" : reader.GetString(6),
-                };
-            }
-
-            _connection.Close();
-
-            return user;
-        }
-
-        public bool ExecuteCommand(SqlCommand command)
+        private bool executeCommand(SqlCommand command)
         {
             try
             {
 
-                _connection.Open();
+                dbConnection.getConnection();
 
                 command.ExecuteNonQuery();
-
-                _connection.Close();
 
                 return true;
 
@@ -103,6 +65,57 @@ namespace DataLayer.Operations
             {
                 return false;
             }
+            finally
+            {
+                dbConnection.closeConnection();
+            }
         }
+
+        public User validateUser(User user)
+        {
+
+            SqlCommand command = new SqlCommand("sp_validate_user", dbConnection.getConnection());
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@Email", user.Email);
+            command.Parameters.AddWithValue("@Password", user.Password);
+
+            return executeReader(command, user);
+        }
+
+        private User executeReader(SqlCommand command, User user)
+        {
+            try
+            {
+                dbConnection.getConnection();
+
+                var reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    user = new User
+                    {
+                        Id_User = reader.IsDBNull(0) ? 0 : reader.GetInt32(0),
+                        Name = reader.IsDBNull(1) ? "" : reader.GetString(1),
+                        LastName = reader.IsDBNull(2) ? "" : reader.GetString(2),
+                        Address = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                        Phone = reader.IsDBNull(4) ? "" : reader.GetString(4),
+                        Email = reader.IsDBNull(5) ? "" : reader.GetString(5),
+                        Password = reader.IsDBNull(6) ? "" : reader.GetString(6),
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                dbConnection.closeConnection();
+            }
+
+            return user;
+        }
+
     }
 }

@@ -139,6 +139,7 @@
     <Content Include="Scripts\jquery-3.7.0.min.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <Content Include="Scripts\js\requests.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

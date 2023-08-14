@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Net;
 using System.Web.Mvc;
 using DataLayer.Models;
 using DataLayer.Operations;
@@ -10,43 +11,36 @@ namespace Administrative.Controllers
 {
     public class ProductController : UserController
     {
-
-        public ProductController()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            SqlConnection connection = new SqlConnection(connectionString);
-            _products = new Products_BLL(connection);
-            _categories = new Categories_BLL(connection);
-        }
-
+        Products_BLL _products = new Products_BLL();
+        Categories_BLL _categories = new Categories_BLL();
         public ActionResult ProductsIndex()
         {
-            if (Auth())
+            if (Sessions.SessionExtensions.Auth())
                 return RedirectToAction("Login", "Home");
 
-            ViewBag.categories = _categories.GetAll();
-            return View();
+            List<Category> categories = _categories.getAllCategories();
+            return View(categories);
         }
 
         public JsonResult ProductsList()
         {
-            return Json(_products.GetAll(), JsonRequestBehavior.AllowGet);
+            return Json(_products.getAllProducts(), JsonRequestBehavior.AllowGet);
         }
         public JsonResult ProductsAdd(Product product)
         {
-            return Json(_products.Add(product, _user.Name), JsonRequestBehavior.AllowGet);
+            return Json(_products.addProduct(product, Sessions.SessionExtensions.loggedUser.Name) ? Response.StatusCode = (int)HttpStatusCode.OK : Response.StatusCode = (int)HttpStatusCode.InternalServerError, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ProductsGetById(int Id)
         {
-            return Json(_products.GetById(Id), JsonRequestBehavior.AllowGet);
+            return Json(_products.getProductById(Id), JsonRequestBehavior.AllowGet);
         }
         public JsonResult ProductsUpdate(Product product)
         {
-            return Json(_products.Update(product, _user.Name), JsonRequestBehavior.AllowGet);
+            return Json(_products.updateProduct(product, Sessions.SessionExtensions.loggedUser.Name) ? Response.StatusCode = (int)HttpStatusCode.OK : Response.StatusCode = (int)HttpStatusCode.InternalServerError, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ProductsDelete(int Id)
         {
-            return Json(_products.Delete(Id), JsonRequestBehavior.AllowGet);
+            return Json(_products.deleteProduct(Id) ? Response.StatusCode = (int)HttpStatusCode.OK : Response.StatusCode = (int)HttpStatusCode.InternalServerError, JsonRequestBehavior.AllowGet);
         }
     }
 }

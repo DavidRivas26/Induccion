@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Net;
 using System.Web.Mvc;
 using DataLayer.Models;
 using DataLayer.Operations;
@@ -8,15 +9,9 @@ using LogicLayer;
 
 namespace Administrative.Controllers
 {
-    public class UserController : BaseController
+    public class UserController : Controller
     {
-        public UserController()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            SqlConnection connection = new SqlConnection(connectionString);
-            _users = new Users_BLL(connection);
-        }
-
+        Users_BLL _users = new Users_BLL();
         public ActionResult Login()
         {
             return View();
@@ -27,28 +22,28 @@ namespace Administrative.Controllers
         }
         public ActionResult Index()
         {
-            if (Auth())
+            if (Sessions.SessionExtensions.Auth())
                 return RedirectToAction("Login");
 
-            ViewBag.User = Session["User"];
-            return View();
+            User user = Sessions.SessionExtensions.loggedUser;
+            return View(user);
         }
         public RedirectToRouteResult LogOut()
         {
-            Session["User"] = null;
+            Sessions.SessionExtensions.loggedUser = null;
             return RedirectToAction("Login");
         }
         public JsonResult UsersAdd(User user)
         {
-            return Json(_users.Add(user), JsonRequestBehavior.AllowGet);
+            return Json(_users.addUser(user) ? Response.StatusCode = (int)HttpStatusCode.OK : Response.StatusCode = (int)HttpStatusCode.InternalServerError, JsonRequestBehavior.AllowGet);
         }
         public JsonResult UsersUpdate(User user)
         {
-            return Json(_users.Update(user), JsonRequestBehavior.AllowGet);
+            return Json(_users.updateUser(user) ? Response.StatusCode = (int)HttpStatusCode.OK : Response.StatusCode = (int)HttpStatusCode.InternalServerError, JsonRequestBehavior.AllowGet);
         }
         public JsonResult UsersValidate(User user)
         {
-            return Json(Session["User"] = _users.Login(user), JsonRequestBehavior.AllowGet);
+            return Json(Sessions.SessionExtensions.loggedUser = _users.validateUser(user), JsonRequestBehavior.AllowGet);
         }
     }
 }

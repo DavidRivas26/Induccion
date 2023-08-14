@@ -1,11 +1,14 @@
 ﻿<script src="~/Scripts/js/product.js"></script>
+
+@model List<DataLayer.Models.Category>
+
 @{
     ViewBag.Title = "Productos";
 }
 
 <div class="container">
     <h2>Listado de Productos</h2>
-    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" onclick="showModal();">Agregar Producto</button><br /><br />
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">Agregar Producto</button><br /><br />
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -53,7 +56,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Producto</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="hideModal();">×</button>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
                 <form id="form">
@@ -62,7 +65,7 @@
                         <label for="Id_Category">Categoria</label>
                         <select class="form-control" name="id_category" id="Id_Category">
                             <option value="" selected="selected" disabled="disabled">Seleccione una opcion</option>
-                            @{ foreach (var category in ViewBag.categories)
+                            @{ foreach (DataLayer.Models.Category category in Model)
                                 {
                                     <option value="@category.Id_Category">@category.Name</option>
                                 }
@@ -96,9 +99,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success" id="btnAdd" onclick="return Add();">Agregar</button>
-                <button type="button" class="btn btn-outline-primary" id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" onclick="hideModal();">Cerrar</button>
+                <button type="button" class="btn btn-outline-success" id="btnAdd">Agregar</button>
+                <button type="button" class="btn btn-outline-primary" id="btnUpdate" style="display:none;">Actualizar</button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

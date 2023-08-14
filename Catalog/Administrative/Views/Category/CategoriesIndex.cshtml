@@ -6,7 +6,7 @@
 
 <div class="container">
     <h2>Listado de Categorias</h2>
-    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" onclick="showModal();">Agregar Categoria</button><br /><br />
+    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">Agregar Categoria</button><br /><br />
     <table class="table table-bordered table-hover">
         <thead>
             <tr>
@@ -45,7 +45,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Categoria</h4>
-                <button type="button" class="close" data-dismiss="modal" onclick="hideModal();">×</button>
+                <button type="button" class="close" data-bs-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
                 <form id="form">
@@ -69,9 +69,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success" id="btnAdd" onclick="return Add();">Agregar</button>
-                <button type="button" class="btn btn-outline-primary" id="btnUpdate" style="display:none;" onclick="Update();">Actualizar</button>
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" onclick="hideModal();">Cerrar</button>
+                <button type="button" class="btn btn-outline-success" id="btnAdd">Agregar</button>
+                <button type="button" class="btn btn-outline-primary" id="btnUpdate" style="display:none;">Actualizar</button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
